@@ -10,13 +10,13 @@ const AboutComp = (props) => {
         <Col sm="6">
           <Card body>
             <CardTitle>Just Want to see the Codelab?</CardTitle>
-            <Button><a href="https://colab.research.google.com/drive/1slwE2MJMbi4L9J0YQMRIpiaIGhPA4E1C">Click Here</a></Button>
+            <Button><a href="https://colab.research.google.com/drive/1slwE2MJMbi4L9J0YQMRIpiaIGhPA4E1C" style={{color: "inherit"}}>Click Here</a></Button>
           </Card>
         </Col>
         <Col sm="6">
           <Card body>
             <CardTitle>See the GitHub Repo?</CardTitle>
-            <Button><a href="">Click Here</a></Button>
+            <Button><a href="https://github.com/timothy-shee/Smart-Discounts" style={{color: "inherit"}}>Click Here</a></Button>
           </Card>
         </Col>
       </Row>
