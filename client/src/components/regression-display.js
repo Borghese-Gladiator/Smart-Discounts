@@ -4,11 +4,10 @@ import {  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 're
 
 const RegressionTable = (props) => {
   return (
-    <Table>
+    <Table dark>
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
           <th>Amount Spent</th>
           <th>Send Discount</th>
         </tr>
@@ -19,7 +18,6 @@ const RegressionTable = (props) => {
             return (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
-                <td>{value["name"]}</td>
                 <td>{value["amount_spent"]}</td>
                 <td>{value["send_discount"]}</td>
               </tr>
@@ -109,11 +107,7 @@ class RegressionDisplay extends Component {
         }
       ],
       "formData": 0,
-      "predPoint": {
-        "name": "Individual X",
-        "amount_spent": 200,
-        "send_discount": 0
-      }
+      "predPoint": 0
     }
     this.predictDiscount = this.predictDiscount.bind(this)
   }
@@ -163,7 +157,7 @@ class RegressionDisplay extends Component {
       <Container>
         <Row>
           <Col sm="6">
-            <h2>Current Data</h2>
+            <h2>Custom Data</h2>
             <RegressionTable data={this.state.data}/>
             <br />
             <Form>
@@ -173,6 +167,7 @@ class RegressionDisplay extends Component {
               </FormGroup>
               <Button onClick={() => this.predictDiscount()}>Predict Discount</Button>
             </Form>
+            <Label for="blah">Send Discount: {this.state.predPoint} , for Amount: { this.state.formData }</Label>
           </Col>
           <Col sm="6">
             <h2>Amount Spent vs Discount</h2>

@@ -15,42 +15,23 @@ function App(props) {
   }
 
   const navStyle = {
+    textAlign: "center"
   }
   const navItemStyle = {
+    display: "inline-block",
+    float:"none",
+    zoom:1
   }
   const navItemLinkStyle = {
   }
 
   return (
-    <div className="App">
-      <Nav tabs style={navStyle}>
-        <NavItem style={navItemStyle}>
-          <NavLink
-            className={classnames({ active: activeTab === '1' })}
-            onClick={() => { toggle('1'); }}
-            style={navItemLinkStyle}
-          >
-            Smart Discounts
-          </NavLink>
-        </NavItem>
-        <NavItem style={navItemStyle}>
-          <NavLink
-            className={classnames({ active: activeTab === '2' })}
-            onClick={() => { toggle('2'); }}
-            style={navItemLinkStyle}
-          >
-            About Project
-          </NavLink>
-        </NavItem>
-      </Nav>
-      <TabContent activeTab={activeTab}>
-        <TabPane tabId="1">
-          <RegressionDisplay />
-        </TabPane>
-        <TabPane tabId="2">
-          <AboutComp />
-        </TabPane>
-      </TabContent>
+    <div className="App" style={{backgroundColor: "#ebebeb"}}>
+      <AboutComp />
+      <br />
+      <br />
+      <br />
+      <RegressionDisplay />
     </div>
   );
 }
