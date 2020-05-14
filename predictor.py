@@ -5,7 +5,9 @@ from pylab import rcParams
 import matplotlib.pyplot as plt
 from collections import OrderedDict
 from scipy.special import expit
+import scipy.stats as stats
 import unittest
+import io
 
 sns.set(style='whitegrid', palette='muted', font_scale=1.5)
 
@@ -57,6 +59,24 @@ class LogisticRegressor:
         gradient = np.dot(X.T, (h - y)) / y.size
         self.W -= lr * gradient
     return self
+  def do_plot(self):
+    from sklearn.linear_model import LogisticRegression
+    X = df['amount_spent'].astype('float').values
+    y = df['send_discount'].astype('float').values
+
+    X = X.reshape(X.shape[0], 1)
+
+    clf2 = LogisticRegression(random_state=0).fit(X, y)
+    clf2.predict(X[:2, :])
+    clf2.predict_proba(X[:2, :])
+
+    plt.scatter(X, clf2.predict_proba(X)[:,1])
+
+    # here is the trick save your figure into a bytes object and you can afterwards expose it via flas
+    bytes_image = io.BytesIO()
+    plt.savefig(bytes_image, format='png')
+    bytes_image.seek(0)
+    return bytes_image
 
 class TestSigmoid(unittest.TestCase):
 
@@ -95,10 +115,28 @@ class TestLogisticRegressor(unittest.TestCase):
 
 if __name__ == '__main__':
     
+
     X = df['amount_spent'].astype('float').values
     y = df['send_discount'].astype('float').values
+
+    myList = X
     X = X.reshape(X.shape[0], 1)
     clf = LogisticRegressor().fit(X, y)
+    # plt.scatter(X, clf.predict(X), label="sigmoid")
+    # plt.legend(prop={'size' : 16})
+    # plt.show()
+
+    # stats.probplot(myList, dist="norm", fit=True, rvalue=True, plot=plt)
+    # plt.show()
+
+    from sklearn.linear_model import LogisticRegression
+
+    clf2 = LogisticRegression(random_state=0).fit(X, y)
+    clf2.predict(X[:2, :])
+    clf2.predict_proba(X[:2, :])
+
+    plt.scatter(X, clf2.predict_proba(X)[:,1])
+    plt.show()
 
     X_test = np.array([10, 250])
     X_test = X_test.reshape(X_test.shape[0], 1)

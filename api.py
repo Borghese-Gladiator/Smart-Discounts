@@ -10,6 +10,8 @@ from predictor import LogisticRegressor
 
 app = flask.Flask(__name__)
 
+app = flask.Flask(__name__, static_folder='../build', static_url_path='/')
+
 app.config["DEBUG"] = True
 
 my_data = {
@@ -27,10 +29,9 @@ clf = LogisticRegressor().fit(X, y)
 def get_current_time():
   return {'time': time.time()}
 
-@app.route('/', methods=['GET'])
-def home():
-  return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 
 # A route to return all of the available entries in our catalog.
@@ -52,5 +53,13 @@ def add_message(id):
   
   # return predictions
   return jsonify({"predictions": y_test.tolist()})
+
+@app.route('/api/data/plots', methods=['GET'])
+def api_send_plot():
+    bytes_obj = clf.do_plot()
+    
+    return send_file(bytes_obj,
+                     attachment_filename='plot.png',
+                     mimetype='image/png')
 
 app.run()

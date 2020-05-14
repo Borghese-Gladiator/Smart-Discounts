@@ -173,7 +173,6 @@ class RegressionDisplay extends Component {
             <h2>Amount Spent vs Discount</h2>
             <RegressionGraph data={this.state.data} />
             <p>Note: 1 = Send Discount, 0 = No Discount</p>
-            <RegressionGraph data={this.state.tempPoint} />
           </Col>
         </Row>
       </Container>
