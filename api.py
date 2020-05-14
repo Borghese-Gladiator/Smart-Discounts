@@ -10,7 +10,7 @@ from predictor import LogisticRegressor
 
 app = flask.Flask(__name__)
 
-app = flask.Flask(__name__, static_folder='./build', static_url_path='/')
+app = flask.Flask(__name__, static_folder='./client/build', static_url_path='/')
 
 app.config["DEBUG"] = True
 
